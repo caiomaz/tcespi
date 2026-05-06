@@ -44,8 +44,15 @@ echo
 CACHED_PYTHON="$(cache_get python_bin)"
 if [[ -n "$CACHED_PYTHON" && -x "$CACHED_PYTHON" ]]; then
     cached_ver=$("$CACHED_PYTHON" --version 2>&1 | awk '{print $2}')
-    ok "Python (cache): ${C}${CACHED_PYTHON}${X} ${D}${cached_ver}${X}"
-    exec "$CACHED_PYTHON" "$SCRIPT_DIR/run.py" "$@"
+    cached_major=$(echo "$cached_ver" | cut -d. -f1)
+    cached_minor=$(echo "$cached_ver" | cut -d. -f2)
+    if [[ "$cached_major" -ge 3 && "$cached_minor" -ge 10 ]]; then
+        ok "Python (cache): ${C}${CACHED_PYTHON}${X} ${D}${cached_ver}${X}"
+        exec "$CACHED_PYTHON" "$SCRIPT_DIR/run.py" "$@"
+    else
+        warn "Cache inválido (Python ${cached_ver} < 3.10) — redetectando..."
+        cache_set "python_bin" ""
+    fi
 fi
 
 # ── procurar python ───────────────────────────────────────────────────────────
