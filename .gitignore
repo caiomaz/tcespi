@@ -1,0 +1,29 @@
+# ambiente virtual
+.venv/
+
+# código do jogo — repo separado, nunca commitar aqui
+fodinha/
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# ferramentas de desenvolvimento
+.sisyphus/
+
+# os artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.sisyphus/
