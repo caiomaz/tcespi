@@ -26,4 +26,4 @@ desktop.ini
 .idea/
 *.swp
 *.swo
-.sisyphus/
+.sisyphus/.launcher_cache
